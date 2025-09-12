@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char *line = NULL;
+size_t len = 0;
+ssize_t theLine;
+char *buff = NULL;
+
+int main() {
+
+  printf("Please Enter some text Here: ");
+  theLine = getline(&line, &len, stdin);
+
+  printf("read in the line: %s", line);
+
+  // strtok to subdivide the whole input string from theLine
+  char *saveptr;
+  char *ret = strtok_r(line, " ", &saveptr);
+  printf("First token is: %s", ret);
+
+  while (ret != NULL) {
+    ret = strtok_r(line, " ", &saveptr);
+    printf("%s/n", ret);
+  }
+
+  free(line);
+  return 0;
+}

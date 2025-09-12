@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char *line = NULL;
+size_t len = 0;
+ssize_t theLine;
+
+int main() {
+
+  printf("Please Enter some text Here: ");
+  theLine = getline(&line, &len, stdin);
+
+  printf("read in the line: %s", line);
+
+  free(line);
+  return 0;
+}
