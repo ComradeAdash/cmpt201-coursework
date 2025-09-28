@@ -1,0 +1,55 @@
+/*
+ * Current Issues:
+ *  - use strcopy instead of just using the same pointer to our array
+ *  - this will fix the issue of only printing 'print'
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char *line = NULL;
+size_t len = 0;
+ssize_t theLine;
+
+int main() {
+  char *the_array[5] = {0};
+  int num_items = 0;
+
+  while (1) {
+    printf("Please Enter some text Here: ");
+    theLine = getline(&line, &len, stdin);
+
+    // Getting rid of the trailing newline character to correcly parse
+    size_t n = strlen(line);
+    if (n && line[n - 1] == '\n') {
+      line[n - 1] = '\0';
+    }
+
+    int new_index = num_items % 5;
+    free(the_array[new_index]);
+
+    if (line != NULL) {
+      size_t new_size = strlen(line) + 1;
+      the_array[new_index] = (char *)malloc(new_size);
+      strcpy(the_array[new_index], line);
+      num_items++;
+
+      int sameWord = strcmp("print", line);
+      printf("SameWord == %d\n", sameWord);
+
+      if (sameWord == 0) {
+        // we want to print the contents of our history array
+        for (int i = 0; i < 5; i++) {
+          printf("%s\n", the_array[i]);
+        }
+      }
+    }
+  }
+
+  for (int i = 0; i < 5; i++) {
+    free(the_array[i]);
+  }
+  free(line);
+  return 0;
+}

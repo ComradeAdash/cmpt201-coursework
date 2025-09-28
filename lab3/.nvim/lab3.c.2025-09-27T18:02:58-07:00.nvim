@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char *line = NULL;
+size_t len = 0;
+ssize_t theLine;
+
+int main() {
+
+
+  //printf("read in the line: %s", line);
+  // here we will have our infinite looping system where we will be monitoring
+  while (1) {
+    printf("Please Enter some text Here: ");
+    theLine = getline(&line, &len, stdin);
+    
+  }
+  // strtok to subdivide the whole input string from theLine
+ /* char *saveptr;
+  char *ret = NULL;
+  char *str = line;
+
+  while ((ret = strtok_r(str, " ", &saveptr))) {
+    printf(" %s\n", ret);
+    str = NULL;
+  } 
+  */
+
+  free(line);
+  //free(ret);
+  return 0;
+}

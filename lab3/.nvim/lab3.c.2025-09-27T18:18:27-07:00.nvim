@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char *line = NULL;
+size_t len = 0;
+ssize_t theLine;
+
+int main() {
+  char* the_array[5];
+  int num_items = 0; 
+
+  while (1) {
+    printf("Please Enter some text Here: ");
+    theLine = getline(&line, &len, stdin);
+    if (num_items == 5){
+      num_items = 0;
+    }
+    if (line != NULL){
+      the_array[num_items] = line;
+      num_items++;
+    }
+    if (strcmp("print",line) == 0){ // check if the command 'print' has been passed in or not
+      // we want to print the contents of our history array 
+      for(int i = 0;i< sizeof(the_array);i++){
+        printf("%s\n",the_array[i]);
+      }
+    }
+  }
+
+  // strtok to subdivide the whole input string from theLine
+  /* char *saveptr;
+   char *ret = NULL;
+   char *str = line;
+
+   while ((ret = strtok_r(str, " ", &saveptr))) {
+     printf(" %s\n", ret);
+     str = NULL;
+   }
+   */
+
+  free(line);
+  // free(ret);
+  return 0;
+}
